@@ -1,0 +1,32 @@
+<!-- <launch>
+  <arg name="model" />
+  <arg name="gui" default="False" />
+  <param name="robot_description" textfile="$(find robot_kin)/urdf/robot_kin.urdf" />
+  <param name="use_gui" value="$(arg gui)" />
+  <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" />
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find robot_kin)/rviz/robot.rviz" />
+</launch> -->
+
+
+<launch>
+  <!-- Start Gazebo -->
+  <include file="$(find robot_kin)/launch/gazebo.launch" />
+
+  <arg name="model" />
+  <arg name="gui" default="False" />
+  <param name="robot_description" textfile="$(find robot_kin)/urdf/robot_kin.urdf" />
+  <param name="use_gui" value="$(arg gui)" />
+
+  <node name="joint_state_publisher_gui" pkg="joint_state_publisher_gui" type="joint_state_publisher_gui" />
+
+  <!-- Chạy Joint State Publisher -->
+  <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" />
+
+  <!-- Chạy Robot State Publisher -->
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
+
+  <!-- Chạy RViz -->
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find robot_kin)/rviz/robot_kin.rviz" />
+</launch>
+
